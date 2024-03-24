@@ -1,0 +1,50 @@
+1)Linux
+  1.Provide steps to create a directory inside a directory where the parent directory does not exist.
+    step 1) open the terminal
+    step 2) Navigate the desire location
+    step 3) Run mkdir -p dir1/dir2/dir3 -- this command will create dir1/dir2/dir3 without parent directory 
+
+  2. How to install a package on a Linux server when there is no internet connection?
+	for ubuntu run command --> dpkg -l | grep package_name
+
+  3.How to access specific folders of Server A from Server B and Server C? 
+	Access Server A from Server B:
+		Open a terminal on Server B.
+		Use SSH to connect to Server A:
+		run command --> ssh username@ServerA_IP
+	Access Server A from Server C:
+		Open a terminal on Server C.
+		Use SSH to connect to Server c:
+		run command --> ssh username@ServerA_IP
+
+  4.How to check all the running processes from a server?
+	run command ---> ps -aux 
+	The output will show a list of running processes with details such as PID.
+	
+  5.Provide the command to delete all the files older than X days inside a specific directory.
+	run command --> find /path/to/directory -type f -mtime +X -delete
+
+  6.Create a shell script to identify the process ID a. script should as a user input for process ID b. If the process exists, the script 	should print the process ID and exit c. If the process doesn't exist script should print the process doesn't exist and asks for 	another input.
+
+#!/bin/bash
+
+check_process() {
+    local pid=$(pgrep -f "$1")
+    if [ -n "$pid" ]; then
+        echo "Process ID: $pid"
+        exit 0
+    else
+        echo "Process '$1' doesn't exist."
+        return 1
+    fi
+}
+
+
+while true; do
+    read -p "Enter the process name or command: " process_name
+    if check_process "$process_name"; then
+        break
+    fi
+done
+
+

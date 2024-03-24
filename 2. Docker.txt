@@ -1,0 +1,53 @@
+2. Docker: 
+	1) What is docker and why do we need it? 
+		Docker is containerization tool which used to deploy any kind of application on any host operating system.
+		Docker has two main components docker d and docker cli,inside docker d container d is service which can be use
+		to manage creation of container n deletion of container which can be access by docker cli. 
+		
+		Docker simplifies the development and deployment of applications, promotes consistency across environments,
+		enhances scalability and efficiency, and supports modern software development practices like DevOps and microservices 				architecture.
+	2) Write a docker file for a sample Java/python application. 
+	   simple flask app 
+	   sample code for flask app
+		
+		from flask import Flask
+
+		app = Flask(__name__)
+
+		@app.route('/')
+		def hello():
+    			return 'Hello, World! This is my Flask app.'
+
+		if __name__ == '__main__':
+    
+    		app.run(host='0.0.0.0', port=8000, debug=True)
+
+		-----------------------------------------------------------------
+
+		DockerFile for flask app
+
+		FROM python:3.9          ---> Base image
+
+		WORKDIR app/             ---> working directory inside container
+
+		COPY  app.py .           ---> copy's code from this directory 
+
+		RUN pip install flask    ---> This will install flask library n add layer on a container
+
+		CMD ["python","app.py"]  ---> This will run command while running the container
+
+		___________________________________________________________________________
+		docker build . -t flask:latest
+		docker run -d -p 8000:8000 flask:latest
+		
+	3)  What is the docker lifecycle?
+		The Docker lifecycle involves creating Docker images, running containers from those images, managing container resources, 			interacting with containers, and eventually stopping and removing containers when they are no longer needed.
+
+	4) What is the difference between an image and a container? 
+	   An image is a read-only template that contains all the instructions and dependencies needed to create a Docker container.
+	   
+	   A container is a runnable instance of a Docker image.
+
+	5) How to check docker container logs? Provide the command for the same
+		docker logs container_id
+
